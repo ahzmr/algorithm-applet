@@ -20,14 +20,14 @@ func! CompileCode()
         elseif &filetype == "cpp"
             exec "!g++ -finput-charset=UTF-8 -fexec-charset=GBK -Wall -std=c++98 %<.cpp -o E:/other/tmp_app/%<"
         elseif &filetype == "java"
-            exec "!javac -encoding utf-8 -d E:/other/classes/ %<.java"
+            exec "!javac -encoding utf-8 -d E:/other/classes/ %"
         endif
 endfunc
 
 " 运行可执行文件
 func! RunCode()
         exec "w"
-        if &filetype == "c" || &filetype == "cpp" || &filetype == "haskell"
+        if &filetype == "c" || &filetype == "cpp"
             exec "! E:/other/tmp_app/%<.exe"
         elseif &filetype == "java"
             exec "!java -cp E:/other/classes/ %<"
@@ -52,4 +52,4 @@ map! <F6> <ESC>:call RunCode()<CR>
 map <F9> :call CompileAndRunCode()<CR>
 map! <F9> <ESC>:call CompileAndRunCode()<CR>
 ```
-如果现在不用会此类工具的，又不想现在学的，可以考虑编写一个脚本文件。
+如果现在不用会此类工具的，又不想现在学的，可以考虑编写一个脚本文件代替gcc/g++并自动加入上面的参数。
