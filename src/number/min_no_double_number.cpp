@@ -18,13 +18,22 @@ long minNoDoubleNumber(long x) {
 	}
 	y /= 10;
 
-	int next;
+	int next = -1;
+	bool hasPlus = false;
 	while(y > 0) {
-		next = (x / y) % 10;
-		if((x / 10 / y) % 10 == next) {
-			x += y;
-			if(9 == next) {
-				return minNoDoubleNumber(x);
+		next = (x / 10 / y) % 10;
+		if((x / y) % 10 == next) {
+			if(!hasPlus) {
+				x += y;
+				hasPlus = true;
+				if(9 == next) {
+					return minNoDoubleNumber(x);
+				}
+			} else {
+				x -= y;
+				if(0 == next) {
+					return minNoDoubleNumber(x);
+				}
 			}
 		} else {
 			y /= 10;
